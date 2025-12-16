@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid + footer</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  min-height: 100%;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #333;
+  z-index: 100;
+  overflow: hidden;
+}
+.navbar a {
+  float: left;
+  color: #f2f2f2;
+  text-decoration: none;
+  padding: 14px 16px;
+  font-size: 16px;
+  text-align: center;
+}
+.navbar a:hover {
+  background: #ddd;
+  color: #000;
+}
+.navbar .right {
+  float: right;
+}
+
+/* Отступ под фиксированное меню */
+.page {
+  margin-top: 46px;
+}
+
+/* GRID-контейнер: три области + футер */
+.grid-layout {
+  display: grid;
+  grid-template-areas:
+    "top"
+    "middle"
+    "bottom"
+    "footer";
+  grid-template-columns: 1fr;          /* одна колонка на всю ширину */
+  grid-template-rows: auto auto auto 80px;
+  min-height: 100vh;
+  width: 100%;                         /* важно */
+}
+
+/* Области */
+.top, .middle, .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;             /* центр по горизонтали */
+  font-size: 32px;
+  color: #fff;
+}
+
+
+.top    { grid-area: top;    background: #ff7043; }
+.middle {
+  grid-area: middle;
+  background: #42a5f5;
+  flex-direction: column;   /* заголовок над текстом */
+  padding: 24px;
+  text-align: left;
+  align-items: flex-start;  /* выравнивание по левому краю */
+  gap: 12px;                /* расстояние между заголовком и текстом */
+  font-size: 20px;          /* чтобы абзац не был слишком крупным */
+}
+.bottom {
+  grid-area: bottom;
+  background: #66bb6a;
+  padding: 24px;
+  padding-bottom: 400px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.footer {
+  grid-area: footer;
+  background: #d81b60;
+  font-size: 20px;
+}
+
+
+.middle-inner {
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.middle h2 {
+  margin-bottom: 8px;
+}
+.destinations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  justify-content: flex-start; /* по левому краю */
+  align-items: flex-start;     /* при разной высоте карточек */
+}
+
+.card {
+  flex: 0 1 calc(33.333% - 16px);
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+.card img {
+  width: 80%;        /* или, например, 80% */
+  max-height: 1000px;  /* ограничение по высоте */
+  object-fit: cover;  /* аккуратно обрезает, если пропорции не совпадают */
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+/* Якорные блоки для прокрутки */
+.section {
+  margin-bottom: 32px;
+}
+
+#top
+#about,
+#tours,
+#booking,
+#contacts {
+  scroll-margin-top: 60px; /* высота меню + небольшой запас */
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <a href="#top">Главная</a>
+  <a href="#about">О нас</a>
+  <a href="#tours">Туры</a>
+  <a href="#contacts">Контакты</a>
+  <div class="right">
+    <a href="#booking">Бронирование</a>
+  </div>
+</div>
+<div class="page" id="top">
+<div class="grid-layout">
+	<header class="top">
+		<h1>Podstavka travel Agency</h1>
+	</header>
+	
+	<aside class="middle">
+	<div class="middle-inner">
+      <h2 id="about">О нас</h2>
+      <p>Мы организуем индивидуальные и групповые путешествия по всему миру.</p>
+	</div>
+    </aside>
+	
+	<main class="bottom">
+      <section class="section" id="tours">
+        <h2>Популярные направления</h2>
+        <div class="destinations">
+          <article class="card">
+            <h3>Париж</h3>
+			<img src="IMG_5269.JPG" alt="Париж">
+            <p>Уикенд во Франции: Эйфелева башня, Лувр и уютные кафе.</p>
+          </article>
+          <article class="card">
+            <h3>Бали</h3>
+			<img src="bali.JPG" alt="Париж">
+            <p>Пляжи, серфинг и рисовые террасы в тропическом раю.</p>
+          </article>
+          <article class="card">
+            <h3>Исландия</h3>
+			<img src="Iceland.JPG" alt="Париж">
+            <p>Водопады, вулканы и северное сияние круглый год.</p>
+          </article>
+		  <article class="card">
+            <h3>Россия</h3>
+			<img src="RedSquare.JPG" alt="Париж">
+            <p>От Южных морей до Полярного края — туры по всей стране.</p>
+          </article>
+		  <article class="card">
+            <h3>Китай</h3>
+			<img src="China.JPG" alt="Париж">
+            <p>кимпиньтяо.</p>
+          </article>
+        </div>
+      </section>
+	</main>
+  
+  <footer class="footer">
+  <span>© 2025 Travel Agency</span>
+  </footer>
+</div>
+</div>
+</body>
+</html>
